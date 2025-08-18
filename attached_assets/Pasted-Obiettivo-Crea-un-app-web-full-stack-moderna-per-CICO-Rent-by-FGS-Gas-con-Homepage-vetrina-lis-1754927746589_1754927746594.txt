@@ -1,0 +1,308 @@
+Obiettivo
+Crea un’app web full-stack moderna per CICO Rent (by FGS Gas) con:
+
+Homepage vetrina + lista veicoli
+
+Pagine dettaglio/prenotazione con calcolo prezzo in tempo reale
+
+Datepicker unico (range) che disabilita i giorni in cui il modello è già al completo (somma prenotazioni ≥ quantity) e le blackout
+
+Flussi Prenotazione telefonica (chiama da mobile / modale “CHIAMACI” da desktop) e Prenota online
+
+Area dipendenti (login) per: prezzi base, blackout, elenco prenotazioni con Modifica e Genera Contratto (PDF)
+
+Email automatiche a cliente e admin con codice prenotazione progressivo formato 08XXXX (080001, 080002, …)
+
+Prezzi, sconti e opzioni (IVA inclusa) come specificato
+
+Test unit ed E2E
+
+Lingua: italiano
+
+Stack tecnico
+Next.js 14 (App Router) + TypeScript
+
+PostgreSQL (sempre, anche in dev) – porta 5433, DB cicorent
+
+Prisma ORM
+
+NextAuth (Credentials) + bcrypt
+
+Tailwind CSS (+ Headless UI/Radix)
+
+Zod
+
+Nodemailer (SMTP Aruba SSL 465)
+
+Puppeteer (o @sparticuz/chromium) per PDF
+
+Playwright (E2E) + Vitest (unit)
+
+ESLint/Prettier
+
+Dati iniziali (seed)
+Volkswagen Crafter L3H3 – furgone – 2 unità – bianco – 82 €/24h
+
+Peugeot Boxer L2H2 (3ª gen) – furgone – 3 unità – bianco – 80 €/24h
+
+Volkswagen Polo 1.0 80cv (2025) – auto – 2 unità – nera/bianca – 60 €/24h
+
+Ritiro: Via Cristoforo Colombo 1778, 00127 Roma (Torrino/Mezzocammino)
+Telefono (env): CICO_PHONE=+39 328 715 3527
+Email admin/mittente: info@cicorent.it
+
+Env (.env esempio)
+Sostituisci <USER>, <PASSWORD>, <HOST> con i tuoi valori.
+
+ini
+Copy
+Edit
+DATABASE_URL=postgresql://<USER>:<PASSWORD>@<HOST>:5433/cicorent?schema=public
+
+NEXTAUTH_SECRET=changeme
+
+SMTP_HOST=smtps.aruba.it
+SMTP_PORT=465
+SMTP_SECURE=true
+SMTP_USER=info@cicorent.it
+SMTP_PASS=pswcicorent
+
+ADMIN_EMAIL=info@cicorent.it
+CICO_PHONE=+39 328 715 3527
+Nodemailer (createTransport)
+
+ts
+Copy
+Edit
+const transporter = nodemailer.createTransport({
+  host: process.env.SMTP_HOST!,
+  port: Number(process.env.SMTP_PORT || 465),
+  secure: true, // SSL su 465
+  auth: { user: process.env.SMTP_USER!, pass: process.env.SMTP_PASS! },
+});
+const FROM = `"CICO Rent" <${process.env.SMTP_USER}>`;
+Prisma (Postgres fisso) – schema e sequenza codice
+prisma
+Copy
+Edit
+datasource db { provider = "postgresql"; url = env("DATABASE_URL") }
+generator client { provider = "prisma-client-js" }
+
+model Vehicle {
+  id            String        @id @default(cuid())
+  name          String
+  slug          String        @unique
+  type          VehicleType
+  basePriceDay  Decimal       @db.Decimal(10,2)
+  quantity      Int
+  colorOptions  String[]
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  bookings      Booking[]
+  blackoutDates BlackoutDate[]
+}
+
+enum VehicleType { VAN CAR }
+
+model BlackoutDate {
+  id        String   @id @default(cuid())
+  vehicleId String
+  date      DateTime
+  vehicle   Vehicle  @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+  @@unique([vehicleId, date])
+}
+
+model Booking {
+  id                 String        @id @default(cuid())
+  bookingCode        String        @unique // 080001, 080002, ...
+  vehicleId          String
+  startDate          DateTime
+  endDate            DateTime
+  daysCount          Int
+  packageType        PackageType
+  kmPlan             KmPlan
+  coverage           Coverage
+  extraDriver        Boolean
+  extraDriverUnder25 Boolean
+  homeDelivery       Boolean
+  homePickup         Boolean
+  totalPrice         Decimal       @db.Decimal(10,2)
+  discountEuroShown  Decimal       @db.Decimal(10,2)
+  discountPctShown   Decimal       @db.Decimal(5,2)
+  customerFirstName  String
+  customerLastName   String
+  customerBirthDate  DateTime
+  customerPhone      String
+  customerEmail      String
+  driverLicenseNo    String
+  addFirstName       String?
+  addLastName        String?
+  addBirthDate       DateTime?
+  addDriverLicenseNo String?
+  notes              String?
+  status             BookingStatus @default(PENDING)
+  createdAt          DateTime      @default(now())
+  updatedAt          DateTime      @updatedAt
+  vehicle            Vehicle       @relation(fields: [vehicleId], references: [id])
+}
+
+enum PackageType { STANDARD_24H VAN_4H VAN_10H WEEKLY MONTHLY }
+enum KmPlan { KM_100 KM_200 UNLIMITED }
+enum Coverage { BASE PARTIAL }
+enum BookingStatus { PENDING CONFIRMED CANCELLED }
+
+model Employee {
+  id       String @id @default(cuid())
+  username String @unique
+  password String
+  role     Role   @default(STAFF)
+}
+enum Role { STAFF ADMIN }
+Migrazione SQL aggiuntiva (sequenza codice):
+
+sql
+Copy
+Edit
+CREATE SEQUENCE IF NOT EXISTS booking_seq START 1 INCREMENT 1;
+-- Generazione in transazione:
+-- SELECT '08' || to_char(nextval('booking_seq'), 'FM0000') AS code;
+Regole prezzi (IVA incl.) + Arrotondamento sconti a 0/5
+Base 24h: Polo 60 · Crafter 82 · Boxer 80
+
+Furgoni orari: 4h 50€ (100 km max), 10h 65€ (flat)
+
+Sconti multi-giorno (solo 24h):
+
+3g: ×2,25 (−25%) · 4g: ×2,75 (~−31,25%) · 5g: ×3,00 (−40%)
+
+6g: ×3,25 (−45,83%) · 7g: ×3,50 (−50%) · 30g: ×16 (−46,67%)
+
+Coperture: Base 1,00× (RCA 500€, Kasko 1000€, furto/incendio 15%); Parziale 1,25× (RCA 250€, Kasko 750€, furto/incendio 15%)
+
+Km/g: 100 inclusi · 200 km +5€/g · illimitati +10€/g
+
+Extra/g: conducente +8€ oppure under 25 +10€ (mutuamente esclusivi)
+
+Consegna/Ritiro entro 10 km: 30€ cad. (one-off)
+
+Cauzione: 1000€ (nota in UI/contratto)
+
+Km eccedenti: 1€/km (solo a contratto)
+
+Arrotondamento sconti (visualizzazione):
+
+Arrotonda sconto in € e sconto in % alla cifra più vicina con 0 o 5 finale:
+roundTo5(x) = Math.round(x/5)*5.
+Il totale resta preciso a 2 decimali.
+
+Pseudocodice calcolo (estratto)
+
+ts
+Copy
+Edit
+function round2(n:number){ return Math.round(n*100)/100; }
+function roundTo5(n:number){ return Math.round(n/5)*5; }
+
+function computeQuote(i: QuoteInput) {
+  const coverageMult = i.coverage === 'PARTIAL' ? 1.25 : 1.0;
+  const kmPerDay = i.kmPlan === 'KM_200' ? 5 : i.kmPlan === 'UNLIMITED' ? 10 : 0;
+  const extraPerDay = i.extraDriverUnder25 ? 10 : (i.extraDriver ? 8 : 0);
+
+  if (i.packageType === 'VAN_4H' || i.packageType === 'VAN_10H') {
+    if (i.vehicleType !== 'VAN') throw new Error('Fasce orarie solo furgoni');
+    const base = i.packageType === 'VAN_4H' ? 50 : 65;
+    const delivery = (i.homeDelivery?30:0)+(i.homePickup?30:0);
+    return { total: round2(base + delivery), discountEuroShown: 0, discountPctShown: 0,
+      breakdown:{ baseWithDiscount:base, km:0, extra:0, delivery } };
+  }
+
+  const days = i.packageType === 'WEEKLY' ? 7 : i.packageType === 'MONTHLY' ? 30 : i.days;
+  const factor =
+    days >= 30 ? 16 : days >= 7 ? 3.5 :
+    days === 6 ? 3.25 : days === 5 ? 3.0 :
+    days === 4 ? 2.75 : days === 3 ? 2.25 : days;
+
+  const coveredDay = i.basePriceDay * coverageMult;
+  const theoretical = coveredDay * days;
+  const baseWithDiscount = theoretical * (factor/days);
+
+  const km = kmPerDay * days;
+  const extra = extraPerDay * days;
+  const delivery = (i.homeDelivery?30:0)+(i.homePickup?30:0);
+
+  const total = round2(baseWithDiscount + km + extra + delivery);
+
+  const discountEuro = theoretical - baseWithDiscount;
+  const discountEuroShown = roundTo5(discountEuro);
+  const discountPctShown = roundTo5((discountEuro / theoretical) * 100);
+
+  return { total,
+    breakdown:{ baseWithDiscount: round2(baseWithDiscount), km, extra, delivery },
+    discountEuroShown, discountPctShown
+  };
+}
+API principali
+POST /api/quote → breakdown + discountEuroShown/discountPctShown
+
+POST /api/book (transazione):
+
+verifica disponibilità (overlap vs quantity, include PENDING)
+
+bookingCode = '08' || to_char(nextval('booking_seq'),'FM0000')
+
+calcola totale
+
+salva Booking
+
+invia 2 email (cliente + ADMIN_EMAIL)
+
+GET /api/vehicles
+
+GET /api/vehicles/[slug]/availability?from=YYYY-MM-DD&to=YYYY-MM-DD (pieni+blackout)
+
+Admin (auth): update prezzi, gestione blackout, lista prenotazioni, PATCH prenotazione (ricalcolo prezzo), confirm/cancel, genera contratto PDF (download diretto)
+
+Email (HTML minimale)
+
+Cliente – Oggetto: CICO Rent – Prenotazione ${bookingCode} ricevuta
+
+Admin – Oggetto: Nuova prenotazione ${bookingCode}
+
+Mittente: FROM come sopra; inserire riepilogo (veicolo, periodo, totale, telefono assistenza +39 328 715 3527)
+
+UI/UX salienti
+Homepage: hero + “La nostra storia” (testo corporate), card veicoli con prezzo “da XX €/24h IVA incl.”, CTA
+
+Dettaglio veicolo: datepicker range unico (giorni pieni/blackout disabilitati), opzioni; messaggi incentivo sconto dinamici; breakdown con sconto arrotondato; CTA PRENOTA
+
+Prenotazione telefonica: mobile → tel:+393287153527; desktop → modale con numero grande e bottone CHIAMACI
+
+Prenota online: form cliente; se “conducente aggiuntivo” → dati aggiuntivo (+ flag under 25); submit → booking PENDING + email + messaggio “Riceverà una chiamata da una nostra operatrice in giornata”
+
+Admin /admin: prezzi base, calendario blackout, elenco prenotazioni con azioni Modifica e Genera Contratto (PDF) in ogni riga
+
+Contratto (HTML → PDF)
+Template contracts/template.html con intestazione CICO Rent e dati legali:
+FGS GAS SAS – P.IVA/CF 05855791009 – VIA DI SANT ALESSANDRO 279 – 00131 ROMA (RM)
+
+Compilazione server-side; Content-Disposition: attachment; filename="Contratto-${bookingCode}.pdf"
+
+Dati inclusi: periodo, giorni, veicolo, copertura con franchigie, km plan, consegna/ritiro, extra, cauzione 1000€, km eccedenti 1€/km, anagrafica cliente e conducente aggiuntivo
+
+Sicurezza & qualità
+NextAuth Credentials + bcrypt; middleware per proteggere /admin
+
+Zod su input API; rate limit su quote/book
+
+Transazioni per integrità (sequenza + salvataggio + email)
+
+Log modifiche prezzi (opzionale PriceChangeLog)
+
+Lighthouse ≥ 90 (perf/accessibility)
+
+Test
+Unit computeQuote() incl. arrotondamento sconti a 0/5
+
+E2E: homepage→prenota (PENDING, email simulate) · admin login→modifica prezzo→blackout→genera PDF
+
+Disponibilità con quantity>1: giorni correttamente disabilitati

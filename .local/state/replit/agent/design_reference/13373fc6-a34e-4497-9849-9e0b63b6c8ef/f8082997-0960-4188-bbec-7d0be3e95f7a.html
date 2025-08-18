@@ -1,0 +1,1344 @@
+<!DOCTYPE html>
+<html lang="it" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CICO Rent - Noleggio Auto e Furgoni Roma</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'primary': {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e293b'
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'slide-up': 'slideUp 0.6s ease-out',
+                        'scale-in': 'scaleIn 0.3s ease-out'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50 text-gray-900">
+
+<!-- @COMPONENT: Header -->
+<header class="bg-white shadow-sm border-b border-gray-100 sticky top-0 z-50">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <div class="flex items-center space-x-4">
+            <div class="bg-primary-800 text-white px-3 py-2 rounded-lg font-bold text-lg">
+                CICO
+            </div>
+            <span class="hidden sm:block text-gray-600 font-medium">Rent</span>
+        </div>
+        
+        <div class="hidden md:flex items-center space-x-8">
+            <a href="#home" class="text-gray-700 hover:text-primary-600 font-medium transition-colors">Home</a>
+            <a href="#vehicles" class="text-gray-700 hover:text-primary-600 font-medium transition-colors">Veicoli</a>
+            <a href="#about" class="text-gray-700 hover:text-primary-600 font-medium transition-colors">Chi Siamo</a>
+            <a href="#contact" class="text-gray-700 hover:text-primary-600 font-medium transition-colors">Contatti</a>
+        </div>
+
+        <div class="flex items-center space-x-4">
+            <a href="tel:+393287153527" class="md:hidden bg-primary-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-primary-700 transition-colors">
+                <i class="fas fa-phone mr-2"></i>Chiama
+            </a>
+            <button id="phone-modal-btn" class="hidden md:flex items-center bg-primary-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-primary-700 transition-colors">
+                <i class="fas fa-phone mr-2"></i>Chiamaci
+            </button>
+            <button class="md:hidden text-gray-600">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+    </nav>
+</header>
+<!-- @END_COMPONENT: Header -->
+
+<!-- @COMPONENT: HeroSection -->
+<section id="home" class="bg-gradient-to-br from-primary-800 to-primary-900 text-white py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+            <div class="animate-slide-up">
+                <h1 class="text-4xl lg:text-6xl font-bold leading-tight mb-6">
+                    Noleggio Auto<br>
+                    <span class="text-blue-300">e Furgoni</span><br>
+                    a Roma
+                </h1>
+                <p class="text-xl text-blue-100 mb-8 leading-relaxed">
+                    La soluzione più conveniente per i tuoi spostamenti. 
+                    Veicoli moderni, prezzi competitivi e un servizio clienti d'eccellenza.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <button onclick="scrollToVehicles()" class="bg-white text-primary-800 px-8 py-4 rounded-xl font-semibold hover:bg-blue-50 transition-all transform hover:scale-105 shadow-lg">
+                        <i class="fas fa-car mr-2"></i>Vedi Veicoli
+                    </button>
+                    <button id="hero-phone-btn" class="border-2 border-white text-white px-8 py-4 rounded-xl font-semibold hover:bg-white hover:text-primary-800 transition-all">
+                        <i class="fas fa-phone mr-2"></i>+39 328 715 3527
+                    </button>
+                </div>
+            </div>
+            
+            <div class="relative animate-fade-in">
+                <!-- Professional automotive image showing modern rental fleet -->
+                <img src="https://images.unsplash.com/photo-1549924231-f129b911e442?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=600" 
+                     alt="Flotta moderna di veicoli CICO Rent" 
+                     class="rounded-2xl shadow-2xl w-full h-auto">
+                <div class="absolute -bottom-6 -left-6 bg-white p-6 rounded-xl shadow-lg animate-scale-in">
+                    <div class="flex items-center space-x-3">
+                        <div class="bg-green-100 p-2 rounded-full">
+                            <i class="fas fa-check text-green-600"></i>
+                        </div>
+                        <div>
+                            <p class="font-semibold text-gray-900">Disponibili Subito</p>
+                            <p class="text-gray-600 text-sm">7 veicoli in flotta</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- @END_COMPONENT: HeroSection -->
+
+<!-- @COMPONENT: VehiclesSection -->
+<section id="vehicles" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-gray-900 mb-4">I Nostri Veicoli</h2>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                Scegli tra la nostra selezione di auto e furgoni moderni, tutti con assicurazione completa e manutenzione garantita.
+            </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- @MAP: vehicles.map(vehicle => ( -->
+            
+            <!-- Volkswagen Crafter -->
+            <div class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
+                <!-- Modern white van for cargo transport -->
+                <img src="https://pixabay.com/get/g23de386d57c87d30d50ee2d61b4d743df5027a7f761dc46846f7abc34a428cf5cba1446c416f309fe02aa23a3323b64a43c2d438b8bf1ee5bf5098ff3ffd50d4_1280.jpg" 
+                     alt="Volkswagen Crafter L3H3" 
+                     class="w-full h-56 object-cover rounded-t-2xl">
+                
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="text-xl font-bold text-gray-900">Volkswagen Crafter</h3>
+                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">Furgone</span>
+                    </div>
+                    
+                    <p class="text-gray-600 mb-4">L3H3 • Grande capacità di carico • Ideale per traslochi</p>
+                    
+                    <div class="grid grid-cols-2 gap-4 mb-6 text-sm">
+                        <div class="flex items-center text-gray-600">
+                            <i class="fas fa-users mr-2 text-gray-400"></i>
+                            <span>2 unità</span>
+                        </div>
+                        <div class="flex items-center text-gray-600">
+                            <i class="fas fa-palette mr-2 text-gray-400"></i>
+                            <span>Bianco</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <span class="text-sm text-gray-500">da</span>
+                            <div class="text-2xl font-bold text-primary-800">82€<span class="text-sm font-normal text-gray-600">/24h</span></div>
+                            <span class="text-xs text-gray-500">IVA inclusa</span>
+                        </div>
+                        <button onclick="openVehicleDetail('crafter')" class="bg-primary-600 text-white px-6 py-3 rounded-xl hover:bg-primary-700 transition-colors font-medium">
+                            Prenota
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Peugeot Boxer -->
+            <div class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
+                <!-- Professional white cargo van for deliveries -->
+                <img src="https://images.unsplash.com/photo-1601362840469-51e4d8d58785?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=600" 
+                     alt="Peugeot Boxer L2H2" 
+                     class="w-full h-56 object-cover rounded-t-2xl">
+                
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="text-xl font-bold text-gray-900">Peugeot Boxer</h3>
+                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">Furgone</span>
+                    </div>
+                    
+                    <p class="text-gray-600 mb-4">L2H2 • Maneggevolezza e spazio • Perfetto in città</p>
+                    
+                    <div class="grid grid-cols-2 gap-4 mb-6 text-sm">
+                        <div class="flex items-center text-gray-600">
+                            <i class="fas fa-users mr-2 text-gray-400"></i>
+                            <span>3 unità</span>
+                        </div>
+                        <div class="flex items-center text-gray-600">
+                            <i class="fas fa-palette mr-2 text-gray-400"></i>
+                            <span>Bianco</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <span class="text-sm text-gray-500">da</span>
+                            <div class="text-2xl font-bold text-primary-800">80€<span class="text-sm font-normal text-gray-600">/24h</span></div>
+                            <span class="text-xs text-gray-500">IVA inclusa</span>
+                        </div>
+                        <button onclick="openVehicleDetail('boxer')" class="bg-primary-600 text-white px-6 py-3 rounded-xl hover:bg-primary-700 transition-colors font-medium">
+                            Prenota
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Volkswagen Polo -->
+            <div class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
+                <!-- Modern compact car in urban setting -->
+                <img src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=600" 
+                     alt="Volkswagen Polo 1.0 80cv" 
+                     class="w-full h-56 object-cover rounded-t-2xl">
+                
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="text-xl font-bold text-gray-900">Volkswagen Polo</h3>
+                        <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Auto</span>
+                    </div>
+                    
+                    <p class="text-gray-600 mb-4">1.0 80cv (2025) • Nuova generazione • Economica e affidabile</p>
+                    
+                    <div class="grid grid-cols-2 gap-4 mb-6 text-sm">
+                        <div class="flex items-center text-gray-600">
+                            <i class="fas fa-users mr-2 text-gray-400"></i>
+                            <span>2 unità</span>
+                        </div>
+                        <div class="flex items-center text-gray-600">
+                            <i class="fas fa-palette mr-2 text-gray-400"></i>
+                            <span>Nera/Bianca</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <span class="text-sm text-gray-500">da</span>
+                            <div class="text-2xl font-bold text-primary-800">60€<span class="text-sm font-normal text-gray-600">/24h</span></div>
+                            <span class="text-xs text-gray-500">IVA inclusa</span>
+                        </div>
+                        <button onclick="openVehicleDetail('polo')" class="bg-primary-600 text-white px-6 py-3 rounded-xl hover:bg-primary-700 transition-colors font-medium">
+                            Prenota
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- @END_MAP )) -->
+        </div>
+    </div>
+</section>
+<!-- @END_COMPONENT: VehiclesSection -->
+
+<!-- @COMPONENT: AboutSection -->
+<section id="about" class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
+            <div>
+                <h2 class="text-4xl font-bold text-gray-900 mb-6">La Nostra Storia</h2>
+                <div class="space-y-4 text-gray-600 leading-relaxed">
+                    <p>
+                        CICO Rent nasce dall'esperienza consolidata di FGS Gas, azienda leader nel settore energetico romano. 
+                        La nostra missione è quella di offrire soluzioni di mobilità flessibili e convenienti per privati e aziende.
+                    </p>
+                    <p>
+                        Con sede nel cuore di Roma, in Via Cristoforo Colombo 1778, serviamo clienti in tutta la capitale 
+                        con una flotta moderna e sempre aggiornata. La nostra esperienza nel settore ci permette di 
+                        garantire standard elevati di qualità e affidabilità.
+                    </p>
+                    <p>
+                        Ogni veicolo della nostra flotta è sottoposto a controlli rigorosi e manutenzione preventiva, 
+                        per assicurare la massima sicurezza e comfort durante il noleggio.
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-3 gap-6 mt-8">
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-primary-800 mb-2">7</div>
+                        <div class="text-sm text-gray-600">Veicoli in Flotta</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-primary-800 mb-2">24/7</div>
+                        <div class="text-sm text-gray-600">Assistenza</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-primary-800 mb-2">100%</div>
+                        <div class="text-sm text-gray-600">Soddisfazione</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="relative">
+                <!-- Professional office or garage facility showing automotive business -->
+                <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=600" 
+                     alt="Sede CICO Rent - Struttura moderna per noleggio veicoli" 
+                     class="rounded-2xl shadow-2xl w-full h-auto">
+                
+                <div class="absolute -bottom-6 -right-6 bg-white p-6 rounded-xl shadow-lg">
+                    <div class="flex items-center space-x-3">
+                        <div class="bg-primary-100 p-2 rounded-full">
+                            <i class="fas fa-map-marker-alt text-primary-600"></i>
+                        </div>
+                        <div>
+                            <p class="font-semibold text-gray-900">Roma Torrino</p>
+                            <p class="text-gray-600 text-sm">Facilmente raggiungibile</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- @END_COMPONENT: AboutSection -->
+
+<!-- @COMPONENT: ContactSection -->
+<section id="contact" class="py-20 bg-primary-800 text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <h2 class="text-4xl font-bold mb-4">Contattaci</h2>
+            <p class="text-xl text-blue-100">Siamo qui per aiutarti a trovare il veicolo perfetto</p>
+        </div>
+        
+        <div class="grid md:grid-cols-3 gap-8 text-center">
+            <div class="bg-primary-700 bg-opacity-50 rounded-2xl p-8">
+                <div class="bg-white bg-opacity-20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-phone text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-2">Telefono</h3>
+                <p class="text-blue-100 mb-4">Chiamaci per informazioni e prenotazioni</p>
+                <a href="tel:+393287153527" class="text-white font-semibold hover:text-blue-200 transition-colors">
+                    +39 328 715 3527
+                </a>
+            </div>
+            
+            <div class="bg-primary-700 bg-opacity-50 rounded-2xl p-8">
+                <div class="bg-white bg-opacity-20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-envelope text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-2">Email</h3>
+                <p class="text-blue-100 mb-4">Scrivici per ricevere un preventivo</p>
+                <a href="mailto:info@cicorent.it" class="text-white font-semibold hover:text-blue-200 transition-colors">
+                    info@cicorent.it
+                </a>
+            </div>
+            
+            <div class="bg-primary-700 bg-opacity-50 rounded-2xl p-8">
+                <div class="bg-white bg-opacity-20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-map-marker-alt text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-2">Indirizzo</h3>
+                <p class="text-blue-100 mb-4">Vieni a trovarci presso la nostra sede</p>
+                <address class="text-white font-semibold not-italic">
+                    Via Cristoforo Colombo 1778<br>
+                    00127 Roma (Torrino)
+                </address>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- @END_COMPONENT: ContactSection -->
+
+<!-- @COMPONENT: Footer -->
+<footer class="bg-gray-900 text-white py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-4 gap-8">
+            <div>
+                <div class="flex items-center space-x-3 mb-6">
+                    <div class="bg-primary-600 px-3 py-2 rounded-lg font-bold text-lg">CICO</div>
+                    <span class="font-medium">Rent</span>
+                </div>
+                <p class="text-gray-400 mb-4">
+                    Il tuo partner affidabile per il noleggio di auto e furgoni a Roma.
+                </p>
+                <p class="text-sm text-gray-500">
+                    FGS GAS SAS<br>
+                    P.IVA/CF 05855791009<br>
+                    VIA DI SANT ALESSANDRO 279<br>
+                    00131 ROMA (RM)
+                </p>
+            </div>
+            
+            <div>
+                <h4 class="font-semibold mb-4">Servizi</h4>
+                <ul class="space-y-2 text-gray-400">
+                    <li><a href="#" class="hover:text-white transition-colors">Noleggio Auto</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Noleggio Furgoni</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Noleggio Orario</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Consegna a Domicilio</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h4 class="font-semibold mb-4">Informazioni</h4>
+                <ul class="space-y-2 text-gray-400">
+                    <li><a href="#" class="hover:text-white transition-colors">Condizioni Generali</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Privacy Policy</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Coperture Assicurative</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">FAQ</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h4 class="font-semibold mb-4">Contatti</h4>
+                <div class="space-y-3 text-gray-400">
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-phone text-sm"></i>
+                        <span>+39 328 715 3527</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-envelope text-sm"></i>
+                        <span>info@cicorent.it</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-clock text-sm"></i>
+                        <span>Lun-Ven 9:00-18:00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
+            <p>&copy; 2024 CICO Rent. Tutti i diritti riservati.</p>
+        </div>
+    </div>
+</footer>
+<!-- @END_COMPONENT: Footer -->
+
+<!-- @COMPONENT: VehicleDetailModal -->
+<div id="vehicle-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-6xl w-full max-h-screen overflow-y-auto animate-scale-in">
+        <div class="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between rounded-t-2xl">
+            <h2 id="modal-title" class="text-2xl font-bold text-gray-900">Dettaglio Veicolo</h2>
+            <button onclick="closeVehicleModal()" class="text-gray-500 hover:text-gray-700 p-2">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+        </div>
+        
+        <div class="p-6">
+            <div class="grid lg:grid-cols-2 gap-8">
+                <!-- Vehicle Image and Info -->
+                <div>
+                    <img id="modal-image" src="" alt="" class="w-full h-80 object-cover rounded-xl mb-6">
+                    
+                    <div id="modal-info" class="space-y-4">
+                        <!-- Dynamic vehicle information -->
+                    </div>
+                </div>
+                
+                <!-- Booking Form -->
+                <div class="bg-gray-50 rounded-xl p-6">
+                    <h3 class="text-xl font-bold text-gray-900 mb-6">Configura il tuo noleggio</h3>
+                    
+                    <!-- @STATE: bookingForm:object -->
+                    <!-- @FUNCTIONALITY: Date picker should disable unavailable dates based on vehicle availability -->
+                    <form id="booking-form" class="space-y-6">
+                        <!-- Date Range Picker -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Periodo di noleggio</label>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <input type="date" id="start-date" name="startDate" 
+                                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                                           data-implementation="Disable dates based on availability API">
+                                    <label class="text-xs text-gray-500 mt-1">Data inizio</label>
+                                </div>
+                                <div>
+                                    <input type="date" id="end-date" name="endDate" 
+                                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                                           data-implementation="Disable dates based on availability API">
+                                    <label class="text-xs text-gray-500 mt-1">Data fine</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Package Type -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Tipo di noleggio</label>
+                            <select id="package-type" name="packageType" 
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                                    onchange="updatePricing()">
+                                <option value="STANDARD_24H">Standard 24h</option>
+                                <option value="VAN_4H">Furgone 4h (solo furgoni)</option>
+                                <option value="VAN_10H">Furgone 10h (solo furgoni)</option>
+                                <option value="WEEKLY">Settimanale</option>
+                                <option value="MONTHLY">Mensile</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Coverage -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Copertura assicurativa</label>
+                            <div class="space-y-3">
+                                <div class="flex items-start space-x-3">
+                                    <input type="radio" id="coverage-base" name="coverage" value="BASE" checked
+                                           class="mt-1 text-primary-600 focus:ring-primary-500">
+                                    <div class="flex-1">
+                                        <label for="coverage-base" class="font-medium text-gray-900 cursor-pointer">Base</label>
+                                        <p class="text-sm text-gray-600">RCA 500€ • Kasko 1000€ • Furto/Incendio 15%</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-3">
+                                    <input type="radio" id="coverage-partial" name="coverage" value="PARTIAL"
+                                           class="mt-1 text-primary-600 focus:ring-primary-500"
+                                           onchange="updatePricing()">
+                                    <div class="flex-1">
+                                        <label for="coverage-partial" class="font-medium text-gray-900 cursor-pointer">Parziale (+25%)</label>
+                                        <p class="text-sm text-gray-600">RCA 250€ • Kasko 750€ • Furto/Incendio 15%</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- KM Plan -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Piano chilometri</label>
+                            <div class="space-y-3">
+                                <div class="flex items-start space-x-3">
+                                    <input type="radio" id="km-100" name="kmPlan" value="KM_100" checked
+                                           class="mt-1 text-primary-600 focus:ring-primary-500">
+                                    <div class="flex-1">
+                                        <label for="km-100" class="font-medium text-gray-900 cursor-pointer">100 km/giorno</label>
+                                        <p class="text-sm text-gray-600">Incluso nel prezzo base</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-3">
+                                    <input type="radio" id="km-200" name="kmPlan" value="KM_200"
+                                           class="mt-1 text-primary-600 focus:ring-primary-500"
+                                           onchange="updatePricing()">
+                                    <div class="flex-1">
+                                        <label for="km-200" class="font-medium text-gray-900 cursor-pointer">200 km/giorno (+5€/giorno)</label>
+                                        <p class="text-sm text-gray-600">Ideale per viaggi lunghi</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-3">
+                                    <input type="radio" id="km-unlimited" name="kmPlan" value="UNLIMITED"
+                                           class="mt-1 text-primary-600 focus:ring-primary-500"
+                                           onchange="updatePricing()">
+                                    <div class="flex-1">
+                                        <label for="km-unlimited" class="font-medium text-gray-900 cursor-pointer">Km illimitati (+10€/giorno)</label>
+                                        <p class="text-sm text-gray-600">Massima libertà di movimento</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Extra Options -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-3">Opzioni extra</label>
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <input type="checkbox" id="extra-driver" name="extraDriver" 
+                                               class="text-primary-600 focus:ring-primary-500"
+                                               onchange="updatePricing(); toggleExtraDriver()">
+                                        <label for="extra-driver" class="font-medium text-gray-900">Conducente aggiuntivo</label>
+                                    </div>
+                                    <span class="text-sm text-gray-600">+8€/giorno</span>
+                                </div>
+                                
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <input type="checkbox" id="extra-driver-under25" name="extraDriverUnder25" 
+                                               class="text-primary-600 focus:ring-primary-500"
+                                               onchange="updatePricing(); toggleExtraDriver()">
+                                        <label for="extra-driver-under25" class="font-medium text-gray-900">Conducente aggiuntivo under 25</label>
+                                    </div>
+                                    <span class="text-sm text-gray-600">+10€/giorno</span>
+                                </div>
+                                
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <input type="checkbox" id="home-delivery" name="homeDelivery" 
+                                               class="text-primary-600 focus:ring-primary-500"
+                                               onchange="updatePricing()">
+                                        <label for="home-delivery" class="font-medium text-gray-900">Consegna a domicilio</label>
+                                    </div>
+                                    <span class="text-sm text-gray-600">30€ (entro 10 km)</span>
+                                </div>
+                                
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <input type="checkbox" id="home-pickup" name="homePickup" 
+                                               class="text-primary-600 focus:ring-primary-500"
+                                               onchange="updatePricing()">
+                                        <label for="home-pickup" class="font-medium text-gray-900">Ritiro a domicilio</label>
+                                    </div>
+                                    <span class="text-sm text-gray-600">30€ (entro 10 km)</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Price Breakdown -->
+                        <div id="price-breakdown" class="bg-white rounded-lg p-4 border border-gray-200">
+                            <h4 class="font-semibold text-gray-900 mb-3">Riepilogo prezzi</h4>
+                            <div id="breakdown-details" class="space-y-2 text-sm">
+                                <!-- Dynamic price breakdown -->
+                                <div class="flex justify-between">
+                                    <span>Base (3 giorni):</span>
+                                    <span data-bind="breakdown.base">180,00€</span>
+                                </div>
+                                <div class="flex justify-between text-green-600">
+                                    <span>Sconto multi-giorno:</span>
+                                    <span data-bind="breakdown.discount">-45€ (-25%)</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Chilometri extra:</span>
+                                    <span data-bind="breakdown.km">0€</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Conducente extra:</span>
+                                    <span data-bind="breakdown.extra">0€</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Consegna/Ritiro:</span>
+                                    <span data-bind="breakdown.delivery">0€</span>
+                                </div>
+                                <hr class="my-2">
+                                <div class="flex justify-between font-bold text-lg">
+                                    <span>Totale:</span>
+                                    <span id="total-price" data-bind="total">135,00€</span>
+                                </div>
+                                <p class="text-xs text-gray-500 mt-2">
+                                    IVA inclusa • Cauzione: 1.000€ • Km eccedenti: 1€/km
+                                </p>
+                            </div>
+                            
+                            <div id="discount-message" class="mt-4 p-3 bg-green-50 border border-green-200 rounded-lg hidden">
+                                <div class="flex items-center space-x-2">
+                                    <i class="fas fa-tag text-green-600"></i>
+                                    <span class="text-sm font-medium text-green-800">Risparmia con il noleggio multi-giorno!</span>
+                                </div>
+                                <p class="text-sm text-green-600 mt-1">
+                                    Stai risparmiando <span id="discount-amount">45€</span> prenotando per più giorni.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <!-- Action Buttons -->
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <button type="button" onclick="initiatePhoneBooking()" 
+                                    class="flex-1 bg-primary-600 text-white px-6 py-4 rounded-xl hover:bg-primary-700 transition-colors font-medium">
+                                <i class="fas fa-phone mr-2"></i>Prenota per Telefono
+                            </button>
+                            <button type="button" onclick="initiateOnlineBooking()" 
+                                    class="flex-1 border-2 border-primary-600 text-primary-600 px-6 py-4 rounded-xl hover:bg-primary-50 transition-colors font-medium">
+                                <i class="fas fa-laptop mr-2"></i>Prenota Online
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- @END_COMPONENT: VehicleDetailModal -->
+
+<!-- @COMPONENT: PhoneModal -->
+<div id="phone-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center p-4">
+    <div class="bg-white rounded-2xl p-8 max-w-md w-full text-center animate-scale-in">
+        <div class="bg-primary-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+            <i class="fas fa-phone text-primary-600 text-2xl"></i>
+        </div>
+        
+        <h3 class="text-2xl font-bold text-gray-900 mb-4">Chiamaci Ora</h3>
+        <p class="text-gray-600 mb-6">
+            Parla direttamente con un nostro operatore per prenotare il tuo veicolo
+        </p>
+        
+        <div class="bg-gray-50 rounded-xl p-4 mb-6">
+            <div class="text-3xl font-bold text-primary-800 mb-2">+39 328 715 3527</div>
+            <div class="text-sm text-gray-600">Lun-Ven 9:00-18:00 • Sab 9:00-13:00</div>
+        </div>
+        
+        <div class="flex gap-4">
+            <button onclick="closePhoneModal()" 
+                    class="flex-1 border border-gray-300 text-gray-700 px-6 py-3 rounded-xl hover:bg-gray-50 transition-colors">
+                Chiudi
+            </button>
+            <a href="tel:+393287153527" 
+               class="flex-1 bg-primary-600 text-white px-6 py-3 rounded-xl hover:bg-primary-700 transition-colors font-medium">
+                <i class="fas fa-phone mr-2"></i>Chiama
+            </a>
+        </div>
+    </div>
+</div>
+<!-- @END_COMPONENT: PhoneModal -->
+
+<!-- @COMPONENT: OnlineBookingModal -->
+<div id="online-booking-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-2xl w-full max-h-screen overflow-y-auto animate-scale-in">
+        <div class="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between rounded-t-2xl">
+            <h2 class="text-2xl font-bold text-gray-900">Prenotazione Online</h2>
+            <button onclick="closeOnlineBookingModal()" class="text-gray-500 hover:text-gray-700 p-2">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+        </div>
+        
+        <div class="p-6">
+            <!-- @FUNCTIONALITY: Form validation and submission with booking code generation -->
+            <form id="online-booking-form" class="space-y-6" data-event="submit:handleOnlineBooking">
+                <!-- Customer Information -->
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Dati del cliente</h3>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Nome *</label>
+                            <input type="text" name="firstName" required
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Cognome *</label>
+                            <input type="text" name="lastName" required
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Data di nascita *</label>
+                            <input type="date" name="birthDate" required
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Telefono *</label>
+                            <input type="tel" name="phone" required
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Email *</label>
+                            <input type="email" name="email" required
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Numero patente *</label>
+                            <input type="text" name="licenseNumber" required
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Additional Driver Section -->
+                <div id="additional-driver-section" class="hidden">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Conducente aggiuntivo</h3>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Nome</label>
+                            <input type="text" name="additionalFirstName"
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Cognome</label>
+                            <input type="text" name="additionalLastName"
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Data di nascita</label>
+                            <input type="date" name="additionalBirthDate"
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Numero patente</label>
+                            <input type="text" name="additionalLicenseNumber"
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Notes -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Note aggiuntive</label>
+                    <textarea name="notes" rows="3" 
+                              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                              placeholder="Inserisci eventuali richieste particolari..."></textarea>
+                </div>
+                
+                <!-- Terms and Conditions -->
+                <div class="flex items-start space-x-3">
+                    <input type="checkbox" id="terms" name="terms" required
+                           class="mt-1 text-primary-600 focus:ring-primary-500">
+                    <div class="flex-1">
+                        <label for="terms" class="text-sm text-gray-700 cursor-pointer">
+                            Accetto i <a href="#" class="text-primary-600 hover:text-primary-700">Termini e Condizioni</a> 
+                            e l'<a href="#" class="text-primary-600 hover:text-primary-700">Informativa sulla Privacy</a> *
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- Submit Button -->
+                <div class="bg-gray-50 rounded-xl p-6">
+                    <div class="text-center mb-4">
+                        <div class="text-2xl font-bold text-primary-800 mb-1" id="final-price">135,00€</div>
+                        <div class="text-sm text-gray-600">Totale del noleggio (IVA inclusa)</div>
+                    </div>
+                    
+                    <button type="submit" 
+                            class="w-full bg-primary-600 text-white px-6 py-4 rounded-xl hover:bg-primary-700 transition-colors font-medium"
+                            data-implementation="Should validate form and create booking">
+                        <i class="fas fa-check mr-2"></i>Conferma Prenotazione
+                    </button>
+                    
+                    <p class="text-sm text-gray-600 text-center mt-4">
+                        Riceverai una chiamata da una nostra operatrice in giornata per confermare la prenotazione
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- @END_COMPONENT: OnlineBookingModal -->
+
+<!-- @COMPONENT: AdminDashboard -->
+<div id="admin-dashboard" class="hidden">
+    <!-- This would be a separate page in the actual application -->
+    <div class="min-h-screen bg-gray-50">
+        <header class="bg-white shadow-sm border-b border-gray-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+                <h1 class="text-2xl font-bold text-gray-900">CICO Rent - Admin</h1>
+                <div class="flex items-center space-x-4">
+                    <span class="text-gray-600">Benvenuto, Admin</span>
+                    <button class="text-primary-600 hover:text-primary-700">Logout</button>
+                </div>
+            </div>
+        </header>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="grid lg:grid-cols-4 gap-6 mb-8">
+                <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm text-gray-600">Prenotazioni Attive</p>
+                            <p class="text-3xl font-bold text-gray-900">12</p>
+                        </div>
+                        <div class="bg-green-100 p-3 rounded-full">
+                            <i class="fas fa-calendar-check text-green-600"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm text-gray-600">Veicoli Disponibili</p>
+                            <p class="text-3xl font-bold text-gray-900">5</p>
+                        </div>
+                        <div class="bg-blue-100 p-3 rounded-full">
+                            <i class="fas fa-car text-blue-600"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm text-gray-600">Ricavi Oggi</p>
+                            <p class="text-3xl font-bold text-gray-900">840€</p>
+                        </div>
+                        <div class="bg-yellow-100 p-3 rounded-full">
+                            <i class="fas fa-euro-sign text-yellow-600"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm text-gray-600">Blackout Attivi</p>
+                            <p class="text-3xl font-bold text-gray-900">3</p>
+                        </div>
+                        <div class="bg-red-100 p-3 rounded-full">
+                            <i class="fas fa-ban text-red-600"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Admin Tabs -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200">
+                <div class="border-b border-gray-200">
+                    <nav class="flex">
+                        <button class="px-6 py-4 text-primary-600 border-b-2 border-primary-600 font-medium">
+                            Prenotazioni
+                        </button>
+                        <button class="px-6 py-4 text-gray-600 hover:text-gray-900 font-medium">
+                            Prezzi Base
+                        </button>
+                        <button class="px-6 py-4 text-gray-600 hover:text-gray-900 font-medium">
+                            Blackout
+                        </button>
+                        <button class="px-6 py-4 text-gray-600 hover:text-gray-900 font-medium">
+                            Veicoli
+                        </button>
+                    </nav>
+                </div>
+                
+                <div class="p-6">
+                    <!-- Bookings Table -->
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead>
+                                <tr class="text-left border-b border-gray-200">
+                                    <th class="pb-3 font-medium text-gray-900">Codice</th>
+                                    <th class="pb-3 font-medium text-gray-900">Cliente</th>
+                                    <th class="pb-3 font-medium text-gray-900">Veicolo</th>
+                                    <th class="pb-3 font-medium text-gray-900">Periodo</th>
+                                    <th class="pb-3 font-medium text-gray-900">Totale</th>
+                                    <th class="pb-3 font-medium text-gray-900">Stato</th>
+                                    <th class="pb-3 font-medium text-gray-900">Azioni</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200">
+                                <!-- @MAP: bookings.map(booking => ( -->
+                                <tr>
+                                    <td class="py-4 font-mono text-sm" data-bind="booking.code">080015</td>
+                                    <td class="py-4">
+                                        <div data-bind="booking.customer">
+                                            <div class="font-medium text-gray-900">Mario Rossi</div>
+                                            <div class="text-sm text-gray-600">mario.rossi@email.com</div>
+                                        </div>
+                                    </td>
+                                    <td class="py-4 text-sm text-gray-900" data-bind="booking.vehicle">Volkswagen Polo</td>
+                                    <td class="py-4 text-sm text-gray-600" data-bind="booking.period">12-15 Gen 2024</td>
+                                    <td class="py-4 font-semibold text-gray-900" data-bind="booking.total">135,00€</td>
+                                    <td class="py-4">
+                                        <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-medium">
+                                            Pending
+                                        </span>
+                                    </td>
+                                    <td class="py-4">
+                                        <div class="flex items-center space-x-2">
+                                            <button class="text-blue-600 hover:text-blue-700 p-1" title="Modifica">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="text-green-600 hover:text-green-700 p-1" title="Genera Contratto">
+                                                <i class="fas fa-file-pdf"></i>
+                                            </button>
+                                            <button class="text-red-600 hover:text-red-700 p-1" title="Cancella">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <!-- @END_MAP )) -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- @END_COMPONENT: AdminDashboard -->
+
+<script>
+(function() {
+    // Vehicle data
+    const vehicles = {
+        'crafter': {
+            name: 'Volkswagen Crafter L3H3',
+            type: 'VAN',
+            basePrice: 82,
+            quantity: 2,
+            colors: ['Bianco'],
+            image: 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=600',
+            description: 'Furgone grande capacità di carico, ideale per traslochi e trasporti voluminosi.'
+        },
+        'boxer': {
+            name: 'Peugeot Boxer L2H2',
+            type: 'VAN',
+            basePrice: 80,
+            quantity: 3,
+            colors: ['Bianco'],
+            image: 'https://images.unsplash.com/photo-1601362840469-51e4d8d58785?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=600',
+            description: 'Furgone versatile e maneggevole, perfetto per consegne urbane e trasporti.'
+        },
+        'polo': {
+            name: 'Volkswagen Polo 1.0 80cv',
+            type: 'CAR',
+            basePrice: 60,
+            quantity: 2,
+            colors: ['Nera', 'Bianca'],
+            image: 'https://images.unsplash.com/photo-1583121274602-3e2820c69888?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&h=600',
+            description: 'Auto moderna ed economica, ideale per spostamenti urbani e viaggi brevi.'
+        }
+    };
+
+    let currentVehicle = null;
+    let currentQuote = null;
+
+    // Utility functions
+    function round2(n) { 
+        return Math.round(n * 100) / 100; 
+    }
+    
+    function roundTo5(n) { 
+        return Math.round(n / 5) * 5; 
+    }
+
+    // TODO: Implement business logic for quote calculation
+    function computeQuote(input) {
+        const coverageMult = input.coverage === 'PARTIAL' ? 1.25 : 1.0;
+        const kmPerDay = input.kmPlan === 'KM_200' ? 5 : input.kmPlan === 'UNLIMITED' ? 10 : 0;
+        const extraPerDay = input.extraDriverUnder25 ? 10 : (input.extraDriver ? 8 : 0);
+        
+        if (input.packageType === 'VAN_4H' || input.packageType === 'VAN_10H') {
+            if (input.vehicleType !== 'VAN') {
+                throw new Error('Fasce orarie solo furgoni');
+            }
+            const base = input.packageType === 'VAN_4H' ? 50 : 65;
+            const delivery = (input.homeDelivery ? 30 : 0) + (input.homePickup ? 30 : 0);
+            return { 
+                total: round2(base + delivery), 
+                discountEuroShown: 0, 
+                discountPctShown: 0,
+                breakdown: { baseWithDiscount: base, km: 0, extra: 0, delivery }
+            };
+        }
+
+        const days = input.packageType === 'WEEKLY' ? 7 : input.packageType === 'MONTHLY' ? 30 : input.days;
+        const factor =
+            days >= 30 ? 16 : days >= 7 ? 3.5 :
+            days === 6 ? 3.25 : days === 5 ? 3.0 :
+            days === 4 ? 2.75 : days === 3 ? 2.25 : days;
+
+        const coveredDay = input.basePriceDay * coverageMult;
+        const theoretical = coveredDay * days;
+        const baseWithDiscount = theoretical * (factor / days);
+
+        const km = kmPerDay * days;
+        const extra = extraPerDay * days;
+        const delivery = (input.homeDelivery ? 30 : 0) + (input.homePickup ? 30 : 0);
+
+        const total = round2(baseWithDiscount + km + extra + delivery);
+
+        const discountEuro = theoretical - baseWithDiscount;
+        const discountEuroShown = roundTo5(discountEuro);
+        const discountPctShown = roundTo5((discountEuro / theoretical) * 100);
+
+        return {
+            total,
+            breakdown: { 
+                baseWithDiscount: round2(baseWithDiscount), 
+                km, 
+                extra, 
+                delivery 
+            },
+            discountEuroShown,
+            discountPctShown
+        };
+    }
+
+    // Modal functions
+    window.openVehicleDetail = function(vehicleSlug) {
+        currentVehicle = vehicles[vehicleSlug];
+        if (!currentVehicle) return;
+
+        const modal = document.getElementById('vehicle-modal');
+        const title = document.getElementById('modal-title');
+        const image = document.getElementById('modal-image');
+        const info = document.getElementById('modal-info');
+
+        title.textContent = currentVehicle.name;
+        image.src = currentVehicle.image;
+        image.alt = currentVehicle.name;
+
+        info.innerHTML = `
+            <div class="bg-gray-50 rounded-lg p-4">
+                <h4 class="font-semibold text-gray-900 mb-3">Caratteristiche veicolo</h4>
+                <div class="grid grid-cols-2 gap-4 text-sm">
+                    <div class="flex items-center text-gray-600">
+                        <i class="fas fa-car mr-2 text-gray-400"></i>
+                        <span>${currentVehicle.type === 'VAN' ? 'Furgone' : 'Auto'}</span>
+                    </div>
+                    <div class="flex items-center text-gray-600">
+                        <i class="fas fa-users mr-2 text-gray-400"></i>
+                        <span>${currentVehicle.quantity} unità disponibili</span>
+                    </div>
+                    <div class="flex items-center text-gray-600">
+                        <i class="fas fa-palette mr-2 text-gray-400"></i>
+                        <span>${currentVehicle.colors.join(', ')}</span>
+                    </div>
+                    <div class="flex items-center text-gray-600">
+                        <i class="fas fa-euro-sign mr-2 text-gray-400"></i>
+                        <span>${currentVehicle.basePrice}€/24h</span>
+                    </div>
+                </div>
+            </div>
+            <p class="text-gray-600 mt-4">${currentVehicle.description}</p>
+        `;
+
+        // Update package type options based on vehicle type
+        const packageSelect = document.getElementById('package-type');
+        const hourlyOptions = packageSelect.querySelectorAll('option[value="VAN_4H"], option[value="VAN_10H"]');
+        hourlyOptions.forEach(option => {
+            option.disabled = currentVehicle.type !== 'VAN';
+            option.style.display = currentVehicle.type !== 'VAN' ? 'none' : 'block';
+        });
+
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        updatePricing();
+    };
+
+    window.closeVehicleModal = function() {
+        const modal = document.getElementById('vehicle-modal');
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+    };
+
+    window.openPhoneModal = function() {
+        const modal = document.getElementById('phone-modal');
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+    };
+
+    window.closePhoneModal = function() {
+        const modal = document.getElementById('phone-modal');
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+    };
+
+    window.closeOnlineBookingModal = function() {
+        const modal = document.getElementById('online-booking-modal');
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+    };
+
+    // Booking functions
+    window.initiatePhoneBooking = function() {
+        // On mobile, directly call
+        if (window.innerWidth < 768) {
+            window.location.href = 'tel:+393287153527';
+        } else {
+            // On desktop, show modal
+            closeVehicleModal();
+            openPhoneModal();
+        }
+    };
+
+    window.initiateOnlineBooking = function() {
+        closeVehicleModal();
+        const modal = document.getElementById('online-booking-modal');
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        
+        // Update final price in booking modal
+        if (currentQuote) {
+            document.getElementById('final-price').textContent = currentQuote.total.toFixed(2) + '€';
+        }
+    };
+
+    // Pricing calculation
+    window.updatePricing = function() {
+        if (!currentVehicle) return;
+
+        const form = document.getElementById('booking-form');
+        const formData = new FormData(form);
+        
+        const startDate = new Date(formData.get('startDate') || Date.now());
+        const endDate = new Date(formData.get('endDate') || Date.now() + 24*60*60*1000);
+        const days = Math.max(1, Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24)));
+
+        const input = {
+            vehicleType: currentVehicle.type,
+            basePriceDay: currentVehicle.basePrice,
+            days: days,
+            packageType: formData.get('packageType') || 'STANDARD_24H',
+            coverage: formData.get('coverage') || 'BASE',
+            kmPlan: formData.get('kmPlan') || 'KM_100',
+            extraDriver: formData.has('extraDriver'),
+            extraDriverUnder25: formData.has('extraDriverUnder25'),
+            homeDelivery: formData.has('homeDelivery'),
+            homePickup: formData.has('homePickup')
+        };
+
+        try {
+            currentQuote = computeQuote(input);
+            updatePriceBreakdown(currentQuote, days);
+        } catch (error) {
+            console.error('Error calculating quote:', error);
+        }
+    };
+
+    function updatePriceBreakdown(quote, days) {
+        const breakdownDetails = document.getElementById('breakdown-details');
+        const totalPrice = document.getElementById('total-price');
+        const discountMessage = document.getElementById('discount-message');
+        
+        let breakdownHTML = '';
+        
+        if (quote.breakdown.baseWithDiscount > 0) {
+            breakdownHTML += `
+                <div class="flex justify-between">
+                    <span>Base (${days} giorni):</span>
+                    <span>${quote.breakdown.baseWithDiscount.toFixed(2)}€</span>
+                </div>
+            `;
+        }
+        
+        if (quote.discountEuroShown > 0) {
+            breakdownHTML += `
+                <div class="flex justify-between text-green-600">
+                    <span>Sconto multi-giorno:</span>
+                    <span>-${quote.discountEuroShown}€ (-${quote.discountPctShown}%)</span>
+                </div>
+            `;
+            
+            discountMessage.classList.remove('hidden');
+            document.getElementById('discount-amount').textContent = `${quote.discountEuroShown}€`;
+        } else {
+            discountMessage.classList.add('hidden');
+        }
+        
+        if (quote.breakdown.km > 0) {
+            breakdownHTML += `
+                <div class="flex justify-between">
+                    <span>Chilometri extra:</span>
+                    <span>${quote.breakdown.km}€</span>
+                </div>
+            `;
+        }
+        
+        if (quote.breakdown.extra > 0) {
+            breakdownHTML += `
+                <div class="flex justify-between">
+                    <span>Conducente extra:</span>
+                    <span>${quote.breakdown.extra}€</span>
+                </div>
+            `;
+        }
+        
+        if (quote.breakdown.delivery > 0) {
+            breakdownHTML += `
+                <div class="flex justify-between">
+                    <span>Consegna/Ritiro:</span>
+                    <span>${quote.breakdown.delivery}€</span>
+                </div>
+            `;
+        }
+        
+        breakdownHTML += `
+            <hr class="my-2">
+            <div class="flex justify-between font-bold text-lg">
+                <span>Totale:</span>
+                <span>${quote.total.toFixed(2)}€</span>
+            </div>
+            <p class="text-xs text-gray-500 mt-2">
+                IVA inclusa • Cauzione: 1.000€ • Km eccedenti: 1€/km
+            </p>
+        `;
+        
+        breakdownDetails.innerHTML = breakdownHTML;
+        totalPrice.textContent = quote.total.toFixed(2) + '€';
+    }
+
+    window.toggleExtraDriver = function() {
+        const extraDriver = document.getElementById('extra-driver');
+        const extraDriverUnder25 = document.getElementById('extra-driver-under25');
+        const additionalSection = document.getElementById('additional-driver-section');
+        
+        // Ensure mutual exclusivity
+        if (extraDriver.checked && extraDriverUnder25.checked) {
+            if (event.target === extraDriver) {
+                extraDriverUnder25.checked = false;
+            } else {
+                extraDriver.checked = false;
+            }
+        }
+        
+        // Show/hide additional driver section
+        if (extraDriver.checked || extraDriverUnder25.checked) {
+            additionalSection.classList.remove('hidden');
+        } else {
+            additionalSection.classList.add('hidden');
+        }
+    };
+
+    // Navigation functions
+    window.scrollToVehicles = function() {
+        document.getElementById('vehicles').scrollIntoView({ behavior: 'smooth' });
+    };
+
+    // Event listeners
+    document.addEventListener('DOMContentLoaded', function() {
+        // Phone modal triggers
+        document.getElementById('phone-modal-btn').addEventListener('click', openPhoneModal);
+        document.getElementById('hero-phone-btn').addEventListener('click', function() {
+            if (window.innerWidth < 768) {
+                window.location.href = 'tel:+393287153527';
+            } else {
+                openPhoneModal();
+            }
+        });
+
+        // Form submission
+        document.getElementById('online-booking-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // TODO: Implement booking submission logic
+            alert('Prenotazione inviata! Riceverai una chiamata da una nostra operatrice in giornata.');
+            closeOnlineBookingModal();
+        });
+
+        // Date change listeners
+        document.getElementById('start-date').addEventListener('change', updatePricing);
+        document.getElementById('end-date').addEventListener('change', updatePricing);
+
+        // Set minimum dates to today
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('start-date').min = today;
+        document.getElementById('end-date').min = today;
+    });
+
+    // Close modals when clicking outside
+    window.addEventListener('click', function(e) {
+        const vehicleModal = document.getElementById('vehicle-modal');
+        const phoneModal = document.getElementById('phone-modal');
+        const bookingModal = document.getElementById('online-booking-modal');
+        
+        if (e.target === vehicleModal) {
+            closeVehicleModal();
+        }
+        if (e.target === phoneModal) {
+            closePhoneModal();
+        }
+        if (e.target === bookingModal) {
+            closeOnlineBookingModal();
+        }
+    });
+
+})();
+</script>
+
+</body>
+</html>

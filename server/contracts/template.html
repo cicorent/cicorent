@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contratto di Noleggio - {{bookingCode}}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #1e40af;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        .company-info {
+            font-size: 12px;
+            color: #666;
+            margin-top: 10px;
+        }
+        .section {
+            margin-bottom: 25px;
+        }
+        .section h3 {
+            color: #1e40af;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+        }
+        .details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 15px 0;
+        }
+        .detail-item {
+            padding: 8px;
+            background: #f8f9fa;
+            border-left: 3px solid #1e40af;
+        }
+        .detail-label {
+            font-weight: bold;
+            color: #666;
+            font-size: 12px;
+        }
+        .detail-value {
+            font-size: 14px;
+            margin-top: 2px;
+        }
+        .total-box {
+            background: #1e40af;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        .terms {
+            font-size: 11px;
+            color: #666;
+            line-height: 1.4;
+            margin-top: 30px;
+        }
+        .signature-section {
+            margin-top: 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+        .signature-box {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>CICO RENT</h1>
+        <h2>Contratto di Noleggio</h2>
+        <div class="company-info">
+            FGS GAS SAS - P.IVA/CF 05855791009<br>
+            VIA DI SANT ALESSANDRO 279 - 00131 ROMA (RM)<br>
+            Tel: +39 328 715 3527 - Email: info@cicorent.it
+        </div>
+    </div>
+
+    <div class="section">
+        <h3>Informazioni Contratto</h3>
+        <div class="details-grid">
+            <div class="detail-item">
+                <div class="detail-label">Codice Prenotazione</div>
+                <div class="detail-value">{{bookingCode}}</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-label">Data Contratto</div>
+                <div class="detail-value">{{currentDate}}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h3>Dati Cliente</h3>
+        <div class="details-grid">
+            <div class="detail-item">
+                <div class="detail-label">Nome e Cognome</div>
+                <div class="detail-value">{{customerName}}</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-label">Data di Nascita</div>
+                <div class="detail-value">{{customerBirthDate}}</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-label">Telefono</div>
+                <div class="detail-value">{{customerPhone}}</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-label">Email</div>
+                <div class="detail-value">{{customerEmail}}</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-label">Numero Patente</div>
+                <div class="detail-value">{{driverLicenseNo}}</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-label">Conducente Aggiuntivo</div>
+                <div class="detail-value">{{additionalDriver}}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h3>Dettagli Noleggio</h3>
+        <div class="details-grid">
+            <div class="detail-item">
+                <div class="detail-label">Veicolo</div>
+                <div class="detail-value">{{vehicleName}}</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-label">Periodo</div>
+                <div class="detail-value">Dal {{startDate}} al {{endDate}}</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-label">Giorni Totali</div>
+                <div class="detail-value">{{daysCount}}</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-label">Copertura Assicurativa</div>
+                <div class="detail-value">{{coverage}}</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-label">Piano Chilometri</div>
+                <div class="detail-value">{{kmPlan}}</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-label">Consegna a Domicilio</div>
+                <div class="detail-value">{{homeDelivery}}</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-label">Ritiro a Domicilio</div>
+                <div class="detail-value">{{homePickup}}</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-label">Note</div>
+                <div class="detail-value">{{notes}}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="total-box">
+        TOTALE CONTRATTO: {{totalPrice}} (IVA INCLUSA)
+    </div>
+
+    <div class="section">
+        <h3>Condizioni Importanti</h3>
+        <div class="terms">
+            <p><strong>CAUZIONE:</strong> È richiesta una cauzione di €1.000 che verrà restituita al termine del noleggio previa verifica delle condizioni del veicolo.</p>
+            
+            <p><strong>CHILOMETRI ECCEDENTI:</strong> I chilometri eccedenti rispetto al piano scelto verranno addebitati al costo di €1,00 per chilometro.</p>
+            
+            <p><strong>COPERTURE ASSICURATIVE:</strong></p>
+            <ul>
+                <li><strong>Base:</strong> RCA con franchigia €500, Kasko con franchigia €1.000, Furto/Incendio con scoperto 15%</li>
+                <li><strong>Parziale:</strong> RCA con franchigia €250, Kasko con franchigia €750, Furto/Incendio con scoperto 15%</li>
+            </ul>
+            
+            <p><strong>RITIRO E CONSEGNA:</strong> Il ritiro avviene presso la nostra sede in Via Cristoforo Colombo 1778, 00127 Roma, salvo diversi accordi per consegna a domicilio.</p>
+            
+            <p><strong>RESPONSABILITÀ:</strong> Il conduttore è responsabile del veicolo durante tutto il periodo di noleggio e si impegna a restituirlo nelle stesse condizioni di ritiro.</p>
+        </div>
+    </div>
+
+    <div class="signature-section">
+        <div class="signature-box">
+            <strong>Il Cliente</strong><br>
+            {{customerName}}
+        </div>
+        <div class="signature-box">
+            <strong>CICO Rent</strong><br>
+            FGS GAS SAS
+        </div>
+    </div>
+</body>
+</html>
