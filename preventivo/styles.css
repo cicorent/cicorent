@@ -67,6 +67,10 @@
 .cal-head{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:10px}
 .cal-title{font-weight:800; letter-spacing:-.01em}
 
+.calendar .cal-head .icon-btn {
+  display: block;
+}
+
 .cal-week{
   display:grid;
   grid-template-columns:repeat(7, 1fr);
