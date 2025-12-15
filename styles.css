@@ -33,6 +33,8 @@ body{
   line-height: 1.55;
 }
 
+[hidden] { display: none !important; }
+
 a{ color: inherit; text-decoration: none; }
 img{ max-width:100%; display:block; }
 

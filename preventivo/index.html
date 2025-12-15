@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="CICO Rent: noleggio auto e furgoni a Roma (breve, medio e lungo termine). Veicoli NUOVI, consegna e ritiro dove preferisci. Pacchetti da 49€ IVA inclusa." />
+  <title>CICO Rent | Noleggio Auto & Furgoni a Roma</title>
+  <link rel="icon" href="../assets/logo.png" />
+  <link rel="preload" href="../assets/logo.png" as="image" />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <a class="skip-link" href="#contenuto">Salta al contenuto</a>
+
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+      <a class="brand" href="#top" aria-label="CICO Rent - Home">
+        <img src="../assets/logo.png" alt="Logo CICO Rent" class="brand-logo" />
+      </a>
+
+      <nav class="nav" aria-label="Navigazione principale">
+        <a href="#servizi">Servizi</a>
+        <a href="#flotta">Flotta</a>
+        <a href="#pacchetti">Pacchetti</a>
+        <a href="#dove">Dove siamo</a>
+        <a href="#contatti">Contatti</a>
+      </nav>
+
+      <div class="header-cta">
+        <a class="tel" href="tel:+393287153527" aria-label="Chiama CICO Rent al +39 328 715 3527">
+          <span class="tel-label">Chiama</span>
+          <span class="tel-number">+39 328 715 3527</span>
+        </a>
+        <button class="icon-btn" id="menuBtn" aria-label="Apri menu" aria-expanded="false" aria-controls="mobileMenu">
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobile-menu" id="mobileMenu" hidden>
+      <div class="container mobile-menu-inner">
+        <a href="#servizi">Servizi</a>
+        <a href="#flotta">Flotta</a>
+        <a href="#pacchetti">Pacchetti</a>
+        <a href="#dove">Dove siamo</a>
+        <a href="#contatti">Contatti</a>
+        <div class="mobile-actions">
+          <a class="btn primary full" href="tel:+393287153527">Chiama ora</a>
+          <a class="btn ghost full" href="mailto:info@cicorent.it">Scrivi una mail</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="contenuto">
+    <section class="page-hero">
+      <div class="container">
+        <div class="hero-line"></div>
+        <p class="kicker">Preventivo Online</p>
+        <h1>Calcola il tuo noleggio in pochi secondi</h1>
+        <p class="lead">
+          Seleziona le date, scegli veicolo e servizi e ottieni un primo preventivo
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container quote-grid">
+        <!-- CALENDAR -->
+        <section class="panel" aria-label="Selezione date">
+          <header class="panel-head">
+            <h2>Date noleggio</h2>
+            <button class="btn ghost small" id="clearDates" type="button">Azzera</button>
+          </header>
+
+          <div class="dates-row" aria-label="Date selezionate">
+            <div class="date-pill">
+              <div class="label">Inizio</div>
+              <div class="value" id="startLabel">--</div>
+            </div>
+            <div class="date-pill">
+              <div class="label">Fine</div>
+              <div class="value" id="endLabel">--</div>
+            </div>
+          </div>
+
+          <div class="calendar" role="application" aria-label="Calendario">
+            <div class="cal-head">
+              <button class="icon-btn" id="prevMonth" aria-label="Mese precedente" type="button">
+                <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+                  <path d="M15 18l-6-6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+              <div class="cal-title" id="calTitle">—</div>
+              <button class="icon-btn" id="nextMonth" aria-label="Mese successivo" type="button">
+                <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+                  <path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            </div>
+
+            <div class="cal-week" aria-hidden="true">
+              <div>Lun</div><div>Mar</div><div>Mer</div><div>Gio</div><div>Ven</div><div>Sab</div><div>Dom</div>
+            </div>
+
+            <div class="cal-grid" id="calGrid" role="grid" aria-label="Giorni del mese">
+              <!-- JS -->
+            </div>
+
+            <p class="micro note"> Seleziona lo stesso giorno per un noleggio di 1 giorno. </p>
+          </div>
+        </section>
+
+        <!-- CONFIG + RESULT -->
+        <section class="panel" aria-label="Configurazione preventivo">
+          <header class="panel-head">
+            <h2>Configurazione</h2>
+            <span class="badge" id="daysBadge">Seleziona le date</span>
+          </header>
+
+          <div class="form-grid">
+            <label class="field">
+              <span class="field-label">Tipo veicolo</span>
+              <select id="vehicleType">
+                <option value="auto">Auto</option>
+                <option value="furgone">Furgone</option>
+              </select>
+            </label>
+
+            <label class="field">
+              <span class="field-label">Veicolo</span>
+              <select id="vehicleModel"></select>
+            </label>
+              
+            <input id="baseRate" type="number" min="0" step="1" inputmode="numeric" hidden/>
+
+            <div class="divider" role="separator" aria-hidden="true"></div>
+
+            <div class="field">
+              <span class="field-label">Assicurazione</span>
+              <div class="segmented" role="radiogroup" aria-label="Assicurazione">
+                <label class="seg">
+                  <input type="radio" name="insurance" value="base" checked />
+                  <span>COPERTURA BASE</span>
+                </label>
+                <label class="seg">
+                  <input type="radio" name="insurance" value="advanced" />
+                  <span>COPERTURA AVANZATA</span>
+                </label>
+              </div>
+              <span class="field-hint" id="insuranceHint">Entrambe le assicurazioni includono <strong>RCA, Furto/Incendio e KASKO</strong>, ma la <strong>Copertura Avanzata</strong> abbassa notevolmente le franchigie per tutelare al meglio il cliente</span>
+            </div>
+
+            <div class="field" id="kmField">
+              <span class="field-label">Chilometraggio</span>
+              <div class="options" id="kmOptions">
+                <!-- JS -->
+              </div>
+            </div>
+
+            <div class="divider" role="separator" aria-hidden="true"></div>
+
+            <div class="field" id="vanPackageField" hidden>
+              <span class="field-label">Pacchetto 1 giorno (solo furgone)</span>
+              <div class="options">
+                <label class="opt">
+                  <input type="radio" name="vanPackage" value="10h" checked />
+                  <span><strong>10 Ore</strong> • € 60</span>
+                </label>
+                <label class="opt">
+                  <input type="radio" name="vanPackage" value="4h" />
+                  <span><strong>4 Ore</strong> • € 49</span>
+                </label>
+              </div>
+              <span class="field-hint">Disponibile solo se selezioni <strong>1 giorno</strong> e <strong>Furgone</strong>.</span>
+            </div>
+
+            <div class="field">
+              <span class="field-label">Servizi aggiuntivi</span>
+              <label class="check">
+                <input type="checkbox" id="extraDriver" />
+                <span>Guidatore aggiuntivo <span class="muted">(+8€ / giorno)</span></span>
+              </label>
+              <label class="check">
+                <input type="checkbox" id="under25" />
+                <span>Guidatore under 25 <span class="muted">(+10% sul totale)</span></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="result" aria-live="polite">
+            <div class="result-main">
+              <div class="result-label">Totale</div>
+              <div class="result-value" id="perDay">—</div>
+              <div class="result-sub" id="total">—</div>
+            </div>
+
+            <div class="breakdown" id="breakdown" hidden>
+              <div class="row"><span>Durata</span><span id="bdDays">—</span></div>
+              <div class="row"><span>Base + servizi</span><span id="bdDaily">—</span></div>
+              <div class="row"><span>Sconto progressivo</span><span id="bdDiscount">—</span></div>
+              <div class="row"><span>Servizi aggiuntivi</span><span id="bdExtras">—</span></div>
+              <div class="row total"><span>Totale IVA inclusa</span><span id="bdTotal">—</span></div>
+            </div>
+
+            <div class="result-cta">
+              <a class="btn primary full" href="tel:+393287153527">Chiama per confermare: +39 328 715 3527</a>
+              <a class="btn ghost full" id="emailQuote" href="mailto:info@cicorent.it">Invia richiesta via Email</a>
+              <p class="micro note">
+                I prezzi riportati nel Preventivo Online potrebbero non essere precisi al 100%. <br> 
+                Per bloccare disponibilità e ottenere la miglior offerta contattaci.
+              </p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-left">
+        <img src="../assets/logo.png" alt="CICO Rent" class="footer-logo" />
+        <p class="footer-tagline">
+          Noleggio Auto e Furgoni a Roma. Dal 2025.<br><br>
+          <strong>Sede Operativa / Piazzale</strong><br>
+          Roma, via Cristoforo Colombo 1778 <br>
+          EUR Torrino / Mezzocammino
+        </p>
+      </div>
+
+      <div class="footer-right">
+        <div class="footer-links">
+          <a href="#" aria-label="Instagram">Instagram</a>
+          <a href="#" aria-label="Facebook">Facebook</a>
+          <a href="#" aria-label="TikTok">TikTok</a>
+        </div>
+
+        <div class="footer-legal">
+          <div><span class="k">Partita IVA:</span> 05855791009</div>
+          <div><span class="k">Ragione Sociale:</span> FGS GAS S.A.S.</div>
+          <div><span class="k">Sede Legale:</span> Via di Sant'Alessandro 279, 00131 Roma (RM)</div>
+        </div>
+
+        <div class="footer-bottom">
+          <span>© <span id="year"></span> CICO Rent</span>
+          <a href="#hero" class="to-top">Torna su ↑</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

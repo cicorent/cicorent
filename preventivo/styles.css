@@ -1,0 +1,203 @@
+/* CICO Rent - Preventivo Online
+   Minimal, sharp, high-contrast. */
+
+.page-hero{padding:46px 0 18px}
+.hero-line{
+  height:1px;
+  background:linear-gradient(90deg, transparent, rgba(28,43,99,.30), transparent);
+  margin:6px 0 18px;
+}
+.inline-link{color:var(--brand); text-decoration:underline; text-underline-offset:3px}
+
+.section{padding:22px 0 64px}
+
+.quote-grid{
+  display:grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap:18px;
+  align-items:start;
+}
+
+.panel{
+  background:rgba(255,255,255,.82);
+  border:1px solid var(--line);
+  border-radius: var(--radius2);
+  box-shadow: var(--shadow);
+  padding:16px;
+}
+.panel-head{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:12px;
+  padding-bottom:10px;
+  border-bottom:1px solid var(--line);
+  margin-bottom:12px;
+}
+.panel h2{margin:0; font-size:16px; letter-spacing:-.01em}
+.badge{
+  font-size:12px;
+  padding:6px 10px;
+  border-radius:999px;
+  border:1px solid var(--line);
+  background:rgba(28,43,99,.06);
+  color:rgba(11,16,32,.78);
+}
+
+.dates-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-bottom:12px;
+}
+.date-pill{
+  border:1px solid var(--line);
+  border-radius: var(--radius);
+  padding:10px 12px;
+  background:var(--paper);
+}
+.date-pill .label{font-size:11px; color:var(--muted); margin-bottom:4px}
+.date-pill .value{font-weight:700; letter-spacing:-.01em}
+
+.calendar{
+  padding:12px;
+  border:1px solid var(--line);
+  border-radius: var(--radius2);
+  background:var(--paper);
+}
+
+.cal-head{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:10px}
+.cal-title{font-weight:800; letter-spacing:-.01em}
+
+.cal-week{
+  display:grid;
+  grid-template-columns:repeat(7, 1fr);
+  gap:6px;
+  color:rgba(11,16,32,.55);
+  font-weight:700;
+  font-size:11px;
+  margin-bottom:8px;
+}
+.cal-grid{
+  display:grid;
+  grid-template-columns:repeat(7, 1fr);
+  gap:6px;
+}
+.day{
+  border:1px solid rgba(15,23,42,.10);
+  background:rgba(247,247,251,.65);
+  border-radius:10px;
+  min-height:44px;
+  padding:8px 8px;
+  font-weight:700;
+  cursor:pointer;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  transition: background .15s ease, border-color .15s ease, transform .15s ease;
+}
+.day:hover{transform:translateY(-1px); border-color:rgba(28,43,99,.25)}
+.day.muted{opacity:.35; cursor:default; transform:none}
+.day .sub{font-size:10px; color:rgba(11,16,32,.55); font-weight:600}
+
+.day.selected{background:rgba(28,43,99,.14); border-color:rgba(28,43,99,.35)}
+.day.in-range{background:rgba(91,89,214,.10); border-color:rgba(91,89,214,.25)}
+.day.today .sub{color:var(--brand); font-weight:800}
+
+.note{margin-top:10px}
+.micro{font-size:12px; color:rgba(11,16,32,.62); line-height:1.55}
+
+.form-grid{display:grid; gap:14px; margin-top:4px}
+.field{display:grid; gap:7px}
+.field-label{font-size:12px; color:rgba(11,16,32,.72); font-weight:700}
+.field-hint{font-size:12px; color:rgba(11,16,32,.60)}
+select, input, textarea{
+  width:100%;
+  border:1px solid var(--line);
+  background:var(--paper);
+  border-radius:12px;
+  padding:12px 12px;
+  font:inherit;
+  outline:none;
+}
+select:focus, input:focus, textarea:focus{
+  border-color:rgba(28,43,99,.35);
+  box-shadow: 0 0 0 4px rgba(91,89,214,.12);
+}
+
+.divider{height:1px; background:var(--line)}
+
+.segmented{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  border:1px solid var(--line);
+  border-radius:12px;
+  overflow:hidden;
+  background:var(--paper);
+}
+.seg{
+  display:flex; align-items:center; justify-content:center;
+  gap:8px;
+  padding:10px 10px;
+  cursor:pointer;
+  user-select:none;
+  font-weight:800;
+  font-size:12px;
+  color:rgba(11,16,32,.70);
+  transition: background .16s ease, color .16s ease;
+}
+.seg input{display:none}
+.seg:has(input:checked){background:rgba(28,43,99,.10); color:var(--brand)}
+
+.options{display:grid; gap:10px}
+.opt{
+  display:flex; align-items:flex-start; gap:10px;
+  padding:10px 12px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:var(--paper);
+  cursor:pointer;
+}
+.opt input{margin-top:3px; width: 1rem}
+.check{display:flex; gap:10px; align-items:flex-start; padding:8px 0}
+.check input{margin-top:3px; width: 1rem}
+.muted{color:rgba(11,16,32,.55)}
+
+.result{margin-top:16px; padding-top:14px; border-top:1px solid var(--line)}
+.result-main{display:grid; gap:6px; margin-bottom:10px}
+.result-label{font-size:12px; color:rgba(11,16,32,.62); font-weight:700}
+.result-value{
+  font-size:42px;
+  font-weight:900;
+  letter-spacing:-.03em;
+  line-height:1;
+  color:var(--brand);
+}
+.result-sub{font-size:13px; color:rgba(11,16,32,.70); font-weight:700}
+
+.breakdown{
+  margin:14px 0 12px;
+  border:1px solid var(--line);
+  background:rgba(247,247,251,.6);
+  border-radius:12px;
+  padding:12px;
+}
+.breakdown .row{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:12px;
+  padding:8px 0;
+  border-bottom:1px solid rgba(15,23,42,.08);
+  font-size:13px;
+}
+.breakdown .row:last-child{border-bottom:none}
+.breakdown .row.total{font-weight:900}
+.result-cta{display:grid; gap:10px}
+
+@media (max-width: 980px){
+  .quote-grid{grid-template-columns:1fr}
+  .nav{display:none}
+  .footer-inner{grid-template-columns:1fr}
+  .footer-links{justify-content:flex-start}
+}
+
+@media (min-width: 981px){
+  #menuBtn{display:none}
+}
